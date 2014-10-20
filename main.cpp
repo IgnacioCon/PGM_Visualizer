@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 
     //Puntero a funcion para el pintado
     glutDisplayFunc(display);
-
+    glutKeyboardFunc(keyboard);//Teclado
     //Puntero a funcion para el redimensionamiento
     //glutReshapeFunc(reshape);
     glutMainLoop();
@@ -64,6 +64,7 @@ void display()
        glLoadIdentity();
        glTranslatef(0.375, 0.375, 0);
 
+       b = a;
        glBegin(GL_POINTS);
 
        a.displayImage();
@@ -74,8 +75,47 @@ void display()
        glutPostRedisplay();
 }
 
+void display2()
+{
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, w, h, 0, 0, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glClear(GL_COLOR_BUFFER_BIT);
 
+    glLoadIdentity();
+    glTranslatef(0.375, 0.375, 0);
 
+    b = a.displayNegImage();
+    glBegin(GL_POINTS);
+
+    a.displayNegativeImage();
+
+    glEnd();
+
+    glFlush(); //Esta funcion es para buffer Single
+    glutPostRedisplay();
+}
+void display3()
+{
+
+    funcInit();
+    b = a.displayThreshImage();
+    glBegin(GL_POINTS);
+
+    a.displayThresholdImage();
+
+    glEnd();
+
+    glFlush(); //Esta funcion es para buffer Single
+    glutPostRedisplay();
+}
+
+void saveImage(void)
+{
+    cout<<"Name your file:"; cin>>file;
+    b.guardarDatos(file.c_str());
+}
 
 
 

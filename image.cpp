@@ -11,6 +11,53 @@ void init()
    glClearColor(0.0,0.0,0.0,0.0); //Esta funcion recive un valor RGBA
 }
 
+void keyboard(unsigned char key,int x, int y)
+{
+
+    switch(key)
+    {
+    case 27: //Tecla de escape
+        //exitAndClean();
+        break;
+    case 'a':
+        //TraslateY(0.1);
+        cout<<"Threshold"<<endl;
+        glutDisplayFunc(display3);
+
+        break;
+    case 's':
+       // TraslateY(-0.1);
+       cout<<"Negativo"<<endl;
+       glutDisplayFunc(display2);
+        break;
+    case 'd':
+
+        cout<<"Original"<<endl;
+        glutDisplayFunc(display);
+        break;
+
+    case 'f':
+
+        cout<<"Save Image"<<endl;
+        saveImage();
+        cout<<"Image saved!";
+
+        break;
+    }
+}
+
+void funcInit(void)
+{
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, 640, 480, 0, 0, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+    glTranslatef(0.375, 0.375, 0);
+}
+
+
 
 
 

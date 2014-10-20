@@ -153,25 +153,23 @@ void PGM::displayNegativeImage()
 
 void PGM::displayThresholdImage()
 {
+    PGM *b = new PGM(this->rows, this->cols);
+
+    b->code = this->code; b->gray = this->gray;
+
     double r;
     int T = 200;
+
+    *b = this->displayThreshImage();
+
     for(int j=0;j<this->rows;j++)
     {
         for(int i=0;i<this->cols;i++)
         {
-            if(this->m[i][j]>=T)
-            {
-                this->m[i][j] = 255;
-            }
-            else
-            {
-                this->m[i][j] = 0;
-            }
-           r=(this->m[i][j])/this->gray;
-            glColor3f(r,r,r);
-            glVertex2s(j,i);
-        }
-
+             r=(b->m[i][j])/b->gray;
+             glColor3f(r,r,r);
+             glVertex2s(j,i);
+         }
     }
 }
 
