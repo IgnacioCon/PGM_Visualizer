@@ -33,13 +33,12 @@ public:
     void guardarDatos(string filename);
     void displayImage();
 
-    void displayNegativeImage();
-    PGM &displayNegImage() const;
 
-    void displayThresholdImage();
-    PGM &displayThreshImage() const;
+    PGM &createNegativeImage() const;
+    PGM &createThresholdImage(int value) const;
 
-
+    friend PGM& operator !(const PGM &a);
+    PGM &operator >(const int value);
 
 };
 

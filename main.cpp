@@ -17,7 +17,7 @@ int main(int argc, char **argv)
    // cin>>file;
     glutInit(&argc, argv); //Inicializacion de GLUT
     a.initMatrix();
-    //b.initMatrix();
+    b.initMatrix();
 
     a.ingresarDatos(filename);
     //a.guardarDatos(file.c_str());
@@ -55,57 +55,31 @@ int main(int argc, char **argv)
 void display()
 {
 
-       glMatrixMode(GL_PROJECTION);
-       glLoadIdentity();
-       glOrtho(0, w, h, 0, 0, 1);
-       glMatrixMode(GL_MODELVIEW);
-       glClear(GL_COLOR_BUFFER_BIT);
+    funcInit();
+    b = a;
 
-       glLoadIdentity();
-       glTranslatef(0.375, 0.375, 0);
+    b.displayImage();
 
-       b = a;
-       glBegin(GL_POINTS);
-
-       a.displayImage();
-
-       glEnd();
-
-       glFlush(); //Esta funcion es para buffer Single
-       glutPostRedisplay();
+    glFlush(); //Esta funcion es para buffer Single
+    glutPostRedisplay();
 }
 
 void display2()
 {
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0, w, h, 0, 0, 1);
-    glMatrixMode(GL_MODELVIEW);
-    glClear(GL_COLOR_BUFFER_BIT);
+    funcInit();
+    b = !a;
 
-    glLoadIdentity();
-    glTranslatef(0.375, 0.375, 0);
-
-    b = a.displayNegImage();
-    glBegin(GL_POINTS);
-
-    a.displayNegativeImage();
-
-    glEnd();
+    b.displayImage();
 
     glFlush(); //Esta funcion es para buffer Single
     glutPostRedisplay();
 }
 void display3()
 {
-
     funcInit();
-    b = a.displayThreshImage();
-    glBegin(GL_POINTS);
+    b= a>200;
 
-    a.displayThresholdImage();
-
-    glEnd();
+    b.displayImage();
 
     glFlush(); //Esta funcion es para buffer Single
     glutPostRedisplay();

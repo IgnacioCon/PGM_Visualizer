@@ -33,16 +33,19 @@ public:
     void showMatrix(); //para uno ver si esta ve, no recomendable para produccion
 
 
-    void suma(const Matrix &a, const Matrix &b);
+    void suma(const Matrix &a);
     Matrix &suma(const Matrix &b) const;
     Matrix& operator +(const Matrix &b);
+    static Matrix suma(Matrix &a, Matrix &b);
 
-    void resta(const Matrix &a, const Matrix &b);
+    void resta(const Matrix &a);
     Matrix &resta(const Matrix &b) const;
     Matrix& operator -(const Matrix &b);
+    static Matrix resta(Matrix &a, Matrix &b);
 
-    Matrix &mult(const Matrix &a, const Matrix &b);
+    Matrix &mult(const Matrix &a);
     Matrix& operator *(const Matrix &b);
+    static Matrix mult(Matrix &a, Matrix &b);
 
 
     void scalar(int scalar);

@@ -108,7 +108,7 @@ void Matrix::showMatrix()
 
 
 
-void Matrix::suma(const Matrix &a, const Matrix &b)
+void Matrix::suma(const Matrix &a)
 {
     this->cols = a.getCols();
     this->rows= a.getRows();
@@ -117,7 +117,7 @@ void Matrix::suma(const Matrix &a, const Matrix &b)
     {
         for(int j=0; j<this->cols; j++)
         {
-            this->m[i][j]=a.m[i][j]+b.m[i][j];
+            this->m[i][j]+=a.m[i][j];
 
         }
 
@@ -155,7 +155,12 @@ Matrix &Matrix::operator +(const Matrix &b)
 
 }
 
-void Matrix::resta(const Matrix &a, const Matrix &b)
+Matrix Matrix::suma( Matrix &a, Matrix &b)
+{
+    return a+b;
+}
+
+void Matrix::resta(const Matrix &a)
 {
     this->cols = a.getCols();
     this->rows= a.getRows();
@@ -164,7 +169,7 @@ void Matrix::resta(const Matrix &a, const Matrix &b)
     {
         for(int j=0; j<this->cols; j++)
         {
-            this->m[i][j]=a.m[i][j]-b.m[i][j];
+            this->m[i][j]-=a.m[i][j];
 
         }
 
@@ -203,12 +208,17 @@ Matrix &Matrix::operator -(const Matrix &b)
     return *c;
 }
 
-Matrix &Matrix::mult(const Matrix &a, const Matrix &b)
+Matrix Matrix::resta(Matrix &a, Matrix &b)
+{
+    return a-b;
+}
+
+Matrix &Matrix::mult(const Matrix &a)
 {
 
-    Matrix *c = new Matrix(a.cols, b.rows);
+    Matrix *c = new Matrix(this->cols, a.rows);
 
-    if(a.cols == b.rows)
+    if(this->cols == a.rows)
     {
 
 
@@ -219,7 +229,7 @@ Matrix &Matrix::mult(const Matrix &a, const Matrix &b)
             c->m[i][j]=0;
             for (int k = 0; k < c->cols; k++)
             {
-                c->m[i][j] += a.m[i][k]*b.m[k][j];
+                c->m[i][j] += this->m[i][k]*a.m[k][j];
             }
         }
     }
@@ -257,6 +267,11 @@ Matrix &Matrix::operator *(const Matrix &b)
     }
 
     return *c;
+}
+
+Matrix Matrix::mult(Matrix &a, Matrix &b)
+{
+    return a*b;
 }
 
 

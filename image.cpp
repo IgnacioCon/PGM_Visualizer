@@ -20,13 +20,13 @@ void keyboard(unsigned char key,int x, int y)
         //exitAndClean();
         break;
     case 'a':
-        //TraslateY(0.1);
+
         cout<<"Threshold"<<endl;
         glutDisplayFunc(display3);
 
         break;
     case 's':
-       // TraslateY(-0.1);
+
        cout<<"Negativo"<<endl;
        glutDisplayFunc(display2);
         break;
@@ -40,7 +40,7 @@ void keyboard(unsigned char key,int x, int y)
 
         cout<<"Save Image"<<endl;
         saveImage();
-        cout<<"Image saved!";
+        cout<<"Image saved!"<<endl;
 
         break;
     }
@@ -56,7 +56,6 @@ void funcInit(void)
     glLoadIdentity();
     glTranslatef(0.375, 0.375, 0);
 }
-
 
 
 

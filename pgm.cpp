@@ -122,6 +122,7 @@ void PGM::guardarDatos(string filename)
 void PGM::displayImage()
 {
     double r;
+    glBegin(GL_POINTS);
     for(int j=0;j<this->rows;j++)
     {
         for(int i=0;i<this->cols;i++)
@@ -132,54 +133,23 @@ void PGM::displayImage()
         }
 
     }
-
+    glEnd();
 }
 
 
-void PGM::displayNegativeImage()
+PGM &PGM::operator >(const int value)
 {
-    double r;
-    for(int j=0;j<this->rows;j++)
-    {
-        for(int i=0;i<this->cols;i++)
-        {
-           r=(255-this->m[i][j])/this->gray;
-            glColor3f(r,r,r);
-            glVertex2s(j,i);
-        }
+    return this->createThresholdImage(value);
 
-    }
 }
 
-void PGM::displayThresholdImage()
+PGM &PGM::createThresholdImage(int value) const
 {
     PGM *b = new PGM(this->rows, this->cols);
 
     b->code = this->code; b->gray = this->gray;
 
-    double r;
-    int T = 200;
-
-    *b = this->displayThreshImage();
-
-    for(int j=0;j<this->rows;j++)
-    {
-        for(int i=0;i<this->cols;i++)
-        {
-             r=(b->m[i][j])/b->gray;
-             glColor3f(r,r,r);
-             glVertex2s(j,i);
-         }
-    }
-}
-
-PGM &PGM::displayThreshImage() const
-{
-    PGM *b = new PGM(this->rows, this->cols);
-
-    b->code = this->code; b->gray = this->gray;
-
-    int T = 200;
+    int T = value;
     for(int j=0;j<this->rows;j++)
     {
         for(int i=0;i<this->cols;i++)
@@ -200,7 +170,14 @@ PGM &PGM::displayThreshImage() const
     return *b;
 }
 
-PGM &PGM::displayNegImage() const
+
+PGM &operator !(const PGM &a)
+{
+    return a.createNegativeImage();
+}
+
+
+PGM &PGM::createNegativeImage() const
 {
     PGM *b = new PGM(this->rows, this->cols);
     b->code = this->code; b->gray = this->gray;
