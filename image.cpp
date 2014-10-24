@@ -11,23 +11,22 @@ void init()
    glClearColor(0.0,0.0,0.0,0.0); //Esta funcion recive un valor RGBA
 }
 
-void keyboard(unsigned char key,int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 
     switch(key)
     {
-    case 27: //Tecla de escape
-        //exitAndClean();
+    case 'x':
+        exit(0);
         break;
     case 'a':
 
-        cout<<"Threshold"<<endl;
+        cout<<"Threshold Filter"<<endl;
         glutDisplayFunc(display3);
 
         break;
     case 's':
-
-       cout<<"Negativo"<<endl;
+       cout<<"Negative Filter"<<endl;
        glutDisplayFunc(display2);
         break;
     case 'd':
@@ -35,7 +34,6 @@ void keyboard(unsigned char key,int x, int y)
         cout<<"Original"<<endl;
         glutDisplayFunc(display);
         break;
-
     case 'f':
 
         cout<<"Save Image"<<endl;
@@ -46,17 +44,29 @@ void keyboard(unsigned char key,int x, int y)
     }
 }
 
-void funcInit(void)
+void funcInit(int w, int h)
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, 640, 480, 0, 0, 1);
+    glOrtho(0, w, h, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
     glTranslatef(0.375, 0.375, 0);
 }
 
+void instructions(void)
+{
+    cout<<"                             PGM-VISUALIZER"<<endl;
+    cout<<"Press A to apply Threshold Filter."<<endl;
+    cout<<"Press S to apply Negative Filter."<<endl;
+    cout<<"Press D to view original image."<<endl;
+    cout<<"Press F to save the image."<<endl;
+    cout<<"Press X to exit."<<endl;
+    cout<<"--------------------------------------------------------------------------------"<<endl;
+
+    cout<<"Enter the name of the Image:"<<endl;
+}
 
 
 

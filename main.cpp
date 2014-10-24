@@ -6,46 +6,39 @@
 #define N 3
 
 
-PGM a,b;
+PGM a;
+PGM b;
 double r;
 int w, h;
 string filename, file;
 int main(int argc, char **argv)
 {
-    cout<<"Enter the name of the Image:"<<endl;
+    instructions();
     cin>>filename;
-   // cin>>file;
-    glutInit(&argc, argv); //Inicializacion de GLUT
-    a.initMatrix();
+
+    glutInit(&argc, argv); //Begin to use GLUT
+
     b.initMatrix();
 
-    a.ingresarDatos(filename);
-    //a.guardarDatos(file.c_str());
-   // b = a.displayThreshImage();
-   // b.guardarDatos(file.c_str());
+    a.loadData(filename);
+
     w = a.getRows() , h = a.getCols();
-    //Inicializacion de la visualizacion
+
+    //Begin display
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-    //Inicializa la posicion espacial de la ventana
     glutInitWindowPosition(100,100);
 
-    //Inicializa el tamano de la ventana
+    //Window size
     glutInitWindowSize(a.getRows(),a.getCols());
 
-    //Aqui se crea la ventana
     glutCreateWindow(filename.c_str());
-
-    //Pantalla Completa
-    //glutFullScreen();
 
     init();
 
-    //Puntero a funcion para el pintado
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);//Teclado
-    //Puntero a funcion para el redimensionamiento
-    //glutReshapeFunc(reshape);
+    glutDisplayFunc(display); //Begin visualization of the image
+    glutKeyboardFunc(keyboard);//Captures the key pressed by the user
+
     glutMainLoop();
 
 
@@ -55,40 +48,41 @@ int main(int argc, char **argv)
 void display()
 {
 
-    funcInit();
-    b = a;
+    funcInit(w,h);
 
-    b.displayImage();
+    a.displayImage(); //Display original image;
 
-    glFlush(); //Esta funcion es para buffer Single
+    glFlush();
     glutPostRedisplay();
 }
 
 void display2()
 {
-    funcInit();
-    b = !a;
+    funcInit(w,h);
+    b = !a; //Negative filter applied
 
     b.displayImage();
 
-    glFlush(); //Esta funcion es para buffer Single
+    glFlush();
     glutPostRedisplay();
 }
 void display3()
 {
-    funcInit();
-    b= a>200;
+    funcInit(w,h);
+
+    b = a>200; //Threshold filter applied
 
     b.displayImage();
 
-    glFlush(); //Esta funcion es para buffer Single
+    glFlush();
     glutPostRedisplay();
 }
 
 void saveImage(void)
 {
     cout<<"Name your file:"; cin>>file;
-    b.guardarDatos(file.c_str());
+    b.saveData(file.c_str()); //Save file
+
 }
 
 

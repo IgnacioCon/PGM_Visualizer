@@ -5,6 +5,7 @@
 #include <fstream>
 
 using namespace std;
+
 class Matrix
 {
 protected:

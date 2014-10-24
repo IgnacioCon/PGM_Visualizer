@@ -3,6 +3,9 @@
 
 PGM::PGM()
 {
+    m = NULL;
+    rows = 0;
+    cols = 0;
 }
 
 PGM::PGM(int rows, int cols)
@@ -51,15 +54,11 @@ void PGM::setCode(const string &value)
 
 PGM::~PGM()
 {
-    for(int i = 0; i<rows; i++)
-    {
-        delete[] m[i];
-    }
-    delete[] m;
 
+    //cout<<"Delete Successful!"<<endl;
 }
 
-void PGM::ingresarDatos(string filename)
+void PGM::loadData(string filename)
 {
     ifstream file;
 
@@ -73,10 +72,12 @@ void PGM::ingresarDatos(string filename)
         {
             file>>this->comment;
         }
+
         file>>this->rows;
         file>>this->cols;     //Read rows and cols.
         file>>this->gray;     //Read the grayscale number
         this->initMatrix();
+
 
         /*Begin reading the picture.*/
         for(int i = 0;i<this->cols;i++)
@@ -92,7 +93,8 @@ void PGM::ingresarDatos(string filename)
 
 }
 
-void PGM::guardarDatos(string filename)
+/*Function to save image, either a copy of the original or one with a filter applied.*/
+void PGM::saveData(string filename)
 {
     ofstream file;
 
@@ -119,6 +121,7 @@ void PGM::guardarDatos(string filename)
     }
 }
 
+/*To display image.*/
 void PGM::displayImage()
 {
     double r;
@@ -136,7 +139,7 @@ void PGM::displayImage()
     glEnd();
 }
 
-
+/*To apply threshold filter to image*/
 PGM &PGM::operator >(const int value)
 {
     return this->createThresholdImage(value);
@@ -154,23 +157,18 @@ PGM &PGM::createThresholdImage(int value) const
     {
         for(int i=0;i<this->cols;i++)
         {
-            if(this->m[i][j]>=T)
-            {
-                b->m[i][j] = 255;
-            }
-            else
-            {
-                b->m[i][j] = 0;
-            }
+
+            b->m[i][j] = this->m[i][j]>=T ? 255:0; //Apply Threshold Filter
 
         }
 
     }
 
     return *b;
+
 }
 
-
+/*To apply Negative Filter to image.*/
 PGM &operator !(const PGM &a)
 {
     return a.createNegativeImage();
@@ -180,6 +178,7 @@ PGM &operator !(const PGM &a)
 PGM &PGM::createNegativeImage() const
 {
     PGM *b = new PGM(this->rows, this->cols);
+
     b->code = this->code; b->gray = this->gray;
 
     for(int j=0;j<this->rows;j++)
@@ -190,7 +189,9 @@ PGM &PGM::createNegativeImage() const
 
         }
     }
+
     return *b;
+
 }
 
 

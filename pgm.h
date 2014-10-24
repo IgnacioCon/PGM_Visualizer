@@ -29,8 +29,8 @@ public:
     string getCode() const;
     void setCode(const string &value);
 
-    void ingresarDatos( string filename);
-    void guardarDatos(string filename);
+    void loadData( string filename);
+    void saveData(string filename);
     void displayImage();
 
 

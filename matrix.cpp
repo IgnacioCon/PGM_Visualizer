@@ -24,11 +24,12 @@ Matrix::Matrix(int rows, int cols)
 
 Matrix::~Matrix()
 {
-    for(int i = 0; i<rows; i++)
+    for(int i = 0; i<cols; i++)
     {
         delete[] m[i];
     }
     delete[] m;
+//cout<<"Delete Successful!"<<endl;
 }
 
 
