@@ -11,38 +11,7 @@ void init()
    glClearColor(0.0,0.0,0.0,0.0); //Esta funcion recive un valor RGBA
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
 
-    switch(key)
-    {
-    case 'x':
-        exit(0);
-        break;
-    case 'a':
-
-        cout<<"Threshold Filter"<<endl;
-        glutDisplayFunc(display3);
-
-        break;
-    case 's':
-       cout<<"Negative Filter"<<endl;
-       glutDisplayFunc(display2);
-        break;
-    case 'd':
-
-        cout<<"Original"<<endl;
-        glutDisplayFunc(display);
-        break;
-    case 'f':
-
-        cout<<"Save Image"<<endl;
-        saveImage();
-        cout<<"Image saved!"<<endl;
-
-        break;
-    }
-}
 
 void funcInit(int w, int h)
 {

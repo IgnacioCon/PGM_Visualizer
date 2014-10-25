@@ -33,7 +33,7 @@ public:
     void saveData(string filename);
     void displayImage();
 
-
+    void copyPGM(PGM &a);
     PGM &createNegativeImage() const;
     PGM &createThresholdImage(int value) const;
 

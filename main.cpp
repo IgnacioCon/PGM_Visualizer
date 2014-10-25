@@ -20,8 +20,8 @@ int main(int argc, char **argv)
 
     b.initMatrix();
 
-    a.loadData(filename);
-
+    a.loadData(filename); //load PGM image
+    b.copyPGM(a);         //copy the PGM to manipulate
     w = a.getRows() , h = a.getCols();
 
     //Begin display
@@ -50,40 +50,45 @@ void display()
 
     funcInit(w,h);
 
-    a.displayImage(); //Display original image;
+    b.displayImage(); //Display original image;
 
     glFlush();
     glutPostRedisplay();
 }
 
-void display2()
+
+
+void keyboard(unsigned char key, int x, int y)
 {
-    funcInit(w,h);
-    b = !a; //Negative filter applied
 
-    b.displayImage();
+    switch(key)
+    {
+    case 'x':
+        exit(0);
+        break;
+    case 'a':
 
-    glFlush();
-    glutPostRedisplay();
+        cout<<"Threshold Filter"<<endl;
+         b = a>200; //Threshold filter applied
+
+        break;
+    case 's':
+       cout<<"Negative Filter"<<endl;
+         b = !a; //Negative filter applied
+        break;
+    case 'd':
+
+        cout<<"Original"<<endl;
+         b.copyPGM(a);
+        break;
+    case 'f':
+
+        cout<<"Save Image"<<endl;
+        cout<<"Name your file:";    cin>>file; //Name save file
+        b.saveData(file.c_str()); //Save file
+        cout<<"Image saved!"<<endl;
+
+        break;
+    }
 }
-void display3()
-{
-    funcInit(w,h);
-
-    b = a>200; //Threshold filter applied
-
-    b.displayImage();
-
-    glFlush();
-    glutPostRedisplay();
-}
-
-void saveImage(void)
-{
-    cout<<"Name your file:"; cin>>file;
-    b.saveData(file.c_str()); //Save file
-
-}
-
-
 

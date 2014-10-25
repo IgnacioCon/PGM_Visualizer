@@ -139,6 +139,26 @@ void PGM::displayImage()
     glEnd();
 }
 
+/*Function to make a copy of the original image*/
+void PGM::copyPGM( PGM &a)
+{
+    //copy the magic number, rows and cols.
+    this->code = a.getCode(); this->gray = a.getGray();
+    this->rows = a.getRows(); this->cols = a.getCols();
+
+    this->initMatrix(); //reserve memory
+
+    //copy the data
+    for(int i = 0;i<this->cols;i++)
+     {
+        for(int j = 0;j<this->rows;j++)
+          {
+                this->m[i][j] = a.m[i][j];
+          }
+     }
+
+}
+
 /*To apply threshold filter to image*/
 PGM &PGM::operator >(const int value)
 {
