@@ -23,3 +23,13 @@ This program contains the following functions:
 * Save the image, either a copy of the original or one with a filter applied. 
 * User-friendly interface that allows them to choose what file to view and what filter to apply in real time.
 
+##Examples.
+
+###Original PGM Image:
+[Imgur](http://i.imgur.com/rPyDoGe.png)
+
+###Threshold Filter Applied:
+[Imgur](http://i.imgur.com/g3WeNAX.png)
+
+###Negative Filter Applied:
+[Imgur](http://i.imgur.com/g3WeNAX.png)
