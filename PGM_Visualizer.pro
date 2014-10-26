@@ -13,4 +13,5 @@ HEADERS += \
     pgm.h \
     image.h
 
-LIBS += -lfreeglut -lopengl32 -lglu32
+win32: LIBS += -lfreeglut -lglut32 -lopengl32
+else:unix: LIBS += -lGL -lglut
